@@ -1,0 +1,1134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khachrod City Smart Information Portal</title>
+<meta name="mini-ad-network-verify" content="07c355c5d02b494943d4d8ae51b7e144">
+<meta name="facebook-domain-verification" content="8w4d47cbtjva3ydxjhh7oxjfjqpqpz" />
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--ink:#0f1f3d;--ink2:#2d4a7a;--ink3:#4a6fa5;
+--sea:#1a4480;--sea2:#2563a0;--teal:#0d7a5f;--teal2:#10a37f;
+--gold:#c4890a;--gold2:#f5a623;
+--paper:#f7f8fc;--paper2:#eef1f8;--paper3:#e3e8f4;
+--white:#ffffff;
+--border:rgba(30,60,120,0.12);
+--shadow:0 2px 16px rgba(15,31,61,0.08);
+--shadow2:0 8px 40px rgba(15,31,61,0.14);
+font-family:'DM Sans',sans-serif;
+}
+
+body{background:var(--paper);color:var(--ink);min-height:100vh}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--sea);color:#fff;padding:6px 0;font-size:11.5px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.topbar-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar a{color:rgba(255,255,255,0.8);text-decoration:none;margin:0 8px}
+.topbar a:hover{color:#fff}
+.topbar-date{color:rgba(255,255,255,0.65);font-size:11px}
+
+/* ── HEADER ── */
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:0}
+.header-main{max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:20px}
+.logo-emblem{width:56px;height:56px;background:var(--sea);border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;overflow:hidden}
+.logo-emblem::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.15) 0%,transparent 60%)}
+.logo-emblem svg{width:32px;height:32px}
+.logo-text h1{font-family:'Playfair Display',serif;font-size:20px;color:var(--sea);line-height:1.15;font-weight:700}
+.logo-text p{font-size:11.5px;color:var(--ink3);letter-spacing:0.04em;margin-top:2px}
+.logo-text span{font-size:10px;color:var(--teal);font-weight:500;letter-spacing:0.06em;text-transform:uppercase}
+.header-search{flex:1;max-width:400px;margin-left:auto;position:relative}
+.header-search input{width:100%;padding:9px 16px 9px 40px;border:1.5px solid var(--border);border-radius:24px;font-size:13.5px;background:var(--paper);color:var(--ink);outline:none;font-family:'DM Sans',sans-serif;transition:border-color .2s,box-shadow .2s}
+.header-search input:focus{border-color:var(--sea2);box-shadow:0 0 0 3px rgba(37,99,160,0.1);background:#fff}
+.header-search .si{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--ink3)}
+.header-auth{display:flex;gap:8px;align-items:center;margin-left:16px}
+.btn{padding:8px 18px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .2s}
+.btn-outline{background:transparent;border:1.5px solid var(--sea);color:var(--sea)}
+.btn-outline:hover{background:var(--sea);color:#fff}
+.btn-solid{background:var(--sea);color:#fff}
+.btn-solid:hover{background:var(--sea2)}
+.btn-sm{padding:6px 14px;font-size:12px}
+
+/* ── NAV ── */
+.nav{background:var(--sea);border-bottom:3px solid var(--gold)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:2px}
+.nav a{color:rgba(255,255,255,0.82);text-decoration:none;padding:11px 14px;font-size:13px;font-weight:400;display:block;transition:all .2s;position:relative}
+.nav a:hover,.nav a.active{color:#fff}
+.nav a.active::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:3px;background:var(--gold2);border-radius:2px 2px 0 0}
+.nav-dropdown{position:relative}
+.nav-dropdown:hover .dropdown{display:block}
+.dropdown{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid var(--border);border-radius:8px;min-width:200px;box-shadow:var(--shadow2);z-index:100;padding:6px 0}
+.dropdown a{color:var(--ink);padding:9px 16px;font-size:13px;display:block}
+.dropdown a:hover{background:var(--paper2);color:var(--sea)}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,var(--sea) 0%,#0c3272 40%,#07284f 100%);position:relative;overflow:hidden;padding:56px 24px 52px}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='rgba(255,255,255,0.04)'/%3E%3C/svg%3E") repeat}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:4px 12px;font-size:11.5px;color:rgba(255,255,255,0.9);margin-bottom:16px}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold2);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h2{font-family:'Playfair Display',serif;font-size:38px;color:#fff;line-height:1.2;margin-bottom:12px;font-weight:700}
+.hero p{font-size:15px;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:24px;max-width:480px;font-weight:300}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn-hero{padding:11px 24px;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .2s}
+.btn-gold{background:var(--gold2);color:#3a1c00}
+.btn-gold:hover{background:#fdb93e}
+.btn-ghost{background:rgba(255,255,255,0.12);color:#fff;border:1.5px solid rgba(255,255,255,0.3)}
+.btn-ghost:hover{background:rgba(255,255,255,0.2)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.hero-stat{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 12px;text-align:center}
+.hero-stat .num{font-size:22px;font-weight:600;color:#fff;font-family:'Playfair Display',serif}
+.hero-stat .lbl{font-size:10.5px;color:rgba(255,255,255,0.6);margin-top:3px;letter-spacing:0.03em}
+
+/* hero right – city card */
+.city-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:16px;padding:20px;backdrop-filter:blur(4px)}
+.city-card h3{font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:14px;letter-spacing:0.05em;text-transform:uppercase;font-weight:400}
+.city-info-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.08)}
+.city-info-row:last-child{border:none}
+.ci-label{font-size:12.5px;color:rgba(255,255,255,0.6)}
+.ci-value{font-size:13px;color:#fff;font-weight:500}
+.ci-badge{font-size:10.5px;padding:2px 8px;border-radius:12px;font-weight:500}
+.ci-badge.green{background:rgba(16,163,127,0.25);color:#6ee7cb}
+.ci-badge.amber{background:rgba(245,166,35,0.2);color:var(--gold2)}
+
+/* ── TICKER ── */
+.ticker{background:var(--paper2);border-bottom:1px solid var(--border);padding:7px 0;overflow:hidden}
+.ticker-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:16px}
+.ticker-label{font-size:11px;font-weight:600;color:var(--sea);background:var(--sea);color:#fff;padding:3px 10px;border-radius:4px;white-space:nowrap;flex-shrink:0}
+.ticker-track{overflow:hidden;flex:1}
+.ticker-items{display:flex;gap:0;white-space:nowrap;animation:scroll 28s linear infinite}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;padding:0 24px}
+.ticker-item .arrow-up{color:#10a37f}
+.ticker-item .arrow-dn{color:#e53e3e}
+.ticker-sep{color:var(--border);padding:0 4px}
+
+/* ── SECTION ── */
+.section{max-width:1200px;margin:0 auto;padding:36px 24px}
+.section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px}
+.section-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--sea);font-weight:600}
+.section-sub{font-size:13px;color:var(--ink3);margin-top:4px}
+.see-all{font-size:13px;color:var(--sea);text-decoration:none;font-weight:500;border-bottom:1px solid transparent}
+.see-all:hover{border-color:var(--sea)}
+
+/* ── MODULE GRID ── */
+.mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.mod-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px 18px;cursor:pointer;transition:all .22s;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden}
+.mod-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0}
+.mod-card.blue::before{background:var(--sea)}
+.mod-card.teal::before{background:var(--teal2)}
+.mod-card.gold::before{background:var(--gold2)}
+.mod-card.purple::before{background:#7c3aed}
+.mod-card.coral::before{background:#e85d24}
+.mod-card.slate::before{background:#475569}
+.mod-card:hover{border-color:var(--sea2);box-shadow:var(--shadow2);transform:translateY(-2px)}
+.mod-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:20px}
+.bg-blue{background:rgba(26,68,128,0.1)}
+.bg-teal{background:rgba(13,122,95,0.1)}
+.bg-gold{background:rgba(196,137,10,0.1)}
+.bg-purple{background:rgba(124,58,237,0.1)}
+.bg-coral{background:rgba(232,93,36,0.1)}
+.bg-slate{background:rgba(71,85,105,0.1)}
+.mod-card h3{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.mod-card p{font-size:12px;color:var(--ink3);line-height:1.5}
+.mod-badge{position:absolute;top:12px;right:12px;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:500;background:rgba(37,99,160,0.1);color:var(--sea2)}
+.mod-badge.live{background:rgba(16,163,127,0.12);color:var(--teal)}
+
+/* ── NEWS GRID ── */
+.news-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+.news-main{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;transition:box-shadow .2s}
+.news-main:hover{box-shadow:var(--shadow2)}
+.news-img{height:200px;background:linear-gradient(135deg,#1a4480,#0d7a5f);display:flex;align-items:flex-end;padding:16px;position:relative;overflow:hidden}
+.news-img::before{content:'Smart City Initiative';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:2px;text-transform:uppercase;font-weight:300}
+.news-img .news-cat{font-size:10.5px;padding:3px 10px;background:var(--gold2);color:#3a1c00;border-radius:12px;font-weight:600;position:relative;z-index:1}
+.news-body{padding:18px}
+.news-body h3{font-size:16px;font-weight:500;color:var(--ink);line-height:1.45;margin-bottom:8px}
+.news-body p{font-size:13px;color:var(--ink3);line-height:1.6}
+.news-meta{display:flex;gap:12px;margin-top:12px;font-size:11.5px;color:var(--ink3)}
+.news-meta span{display:flex;align-items:center;gap:4px}
+.news-side{display:flex;flex-direction:column;gap:12px}
+.news-card-sm{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;transition:all .2s;display:flex;gap:12px;align-items:flex-start}
+.news-card-sm:hover{border-color:var(--sea2);box-shadow:var(--shadow)}
+.news-sm-img{width:52px;height:52px;border-radius:8px;background:linear-gradient(135deg,var(--sea),var(--teal));flex-shrink:0}
+.news-sm-body h4{font-size:13px;font-weight:500;color:var(--ink);line-height:1.4;margin-bottom:4px}
+.news-sm-body .meta{font-size:11px;color:var(--ink3)}
+
+/* ── PRICE DASHBOARD ── */
+.price-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.price-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;justify-content:space-between;align-items:center;transition:box-shadow .2s}
+.price-card:hover{box-shadow:var(--shadow)}
+.price-left h4{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:3px}
+.price-left p{font-size:11.5px;color:var(--ink3)}
+.price-right{text-align:right}
+.price-val{font-size:18px;font-weight:600;color:var(--sea);font-family:'Playfair Display',serif}
+.price-unit{font-size:11px;color:var(--ink3)}
+.price-chg{font-size:11px;padding:2px 7px;border-radius:10px;margin-top:4px;display:inline-block;font-weight:500}
+.chg-up{background:rgba(16,163,127,0.1);color:var(--teal)}
+.chg-dn{background:rgba(229,62,62,0.1);color:#e53e3e}
+.chg-flat{background:rgba(100,116,139,0.1);color:#64748b}
+
+/* ── SUBDOMAIN PANEL ── */
+.sub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.sub-chip{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;transition:all .2s;cursor:pointer;text-decoration:none;color:inherit}
+.sub-chip:hover{border-color:var(--sea2);background:var(--paper2);box-shadow:var(--shadow)}
+.sub-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sub-dot.active{background:var(--teal2)}
+.sub-dot.reserved{background:var(--gold2)}
+.sub-dot.pending{background:#94a3b8}
+.sub-name{font-size:13px;font-weight:500;color:var(--sea)}
+.sub-url{font-size:10.5px;color:var(--ink3)}
+
+/* ── EVENTS ── */
+.events-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.event-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .2s;cursor:pointer}
+.event-card:hover{box-shadow:var(--shadow2);transform:translateY(-2px)}
+.event-header{padding:18px;background:linear-gradient(135deg,var(--sea),#0c3272);color:#fff;position:relative}
+.event-date{font-size:28px;font-weight:700;font-family:'Playfair Display',serif;line-height:1}
+.event-month{font-size:12px;color:rgba(255,255,255,0.65);margin-top:2px}
+.event-body{padding:14px 18px}
+.event-body h3{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:5px}
+.event-body p{font-size:12px;color:var(--ink3)}
+.event-tag{position:absolute;top:12px;right:12px;font-size:10px;padding:3px 8px;border-radius:8px;font-weight:600}
+.et-festival{background:var(--gold2);color:#3a1c00}
+.et-meeting{background:rgba(255,255,255,0.2);color:#fff;border:1px solid rgba(255,255,255,0.3)}
+
+/* ── BUSINESS DIR ── */
+.biz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.biz-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;gap:12px;transition:all .2s;cursor:pointer}
+.biz-card:hover{border-color:var(--sea2);box-shadow:var(--shadow)}
+.biz-icon{width:46px;height:46px;border-radius:10px;background:var(--paper2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.biz-body h4{font-size:13.5px;font-weight:500;color:var(--ink);margin-bottom:3px}
+.biz-body p{font-size:11.5px;color:var(--ink3);margin-bottom:6px}
+.biz-stars{font-size:11px;color:var(--gold2)}
+.biz-cat{font-size:10.5px;padding:2px 8px;background:var(--paper3);color:var(--ink3);border-radius:8px;display:inline-block;margin-left:6px}
+
+/* ── ADMIN PANEL TEASER ── */
+.admin-banner{background:linear-gradient(135deg,#0f1f3d 0%,var(--sea) 60%,#0d7a5f 100%);border-radius:16px;padding:28px 32px;display:flex;justify-content:space-between;align-items:center;gap:24px;color:#fff;position:relative;overflow:hidden}
+.admin-banner::before{content:'';position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;border:40px solid rgba(255,255,255,0.04)}
+.admin-banner h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:6px}
+.admin-banner p{font-size:13px;color:rgba(255,255,255,0.7);max-width:440px;line-height:1.5}
+.admin-roles{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.role-chip{font-size:11.5px;padding:4px 12px;border-radius:14px;border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.85)}
+.role-chip.super{border-color:var(--gold2);color:var(--gold2)}
+
+/* ── FEEDBACK ── */
+.feedback-form{background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px}
+.feedback-form h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--sea);margin-bottom:18px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group label{font-size:12.5px;font-weight:500;color:var(--ink2)}
+.form-group input,.form-group textarea,.form-group select{border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13.5px;color:var(--ink);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--sea2)}
+.form-group textarea{resize:vertical;min-height:90px}
+.submit-row{display:flex;justify-content:flex-end;margin-top:6px}
+.btn-submit{background:var(--sea);color:#fff;border:none;padding:10px 28px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
+.btn-submit:hover{background:var(--sea2)}
+
+/* ── FOOTER ── */
+.footer{background:var(--ink);color:rgba(255,255,255,0.7);margin-top:16px}
+.footer-top{max-width:1200px;margin:0 auto;padding:36px 24px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+.footer h4{font-size:13px;font-weight:600;color:#fff;margin-bottom:14px;letter-spacing:0.03em}
+.footer p{font-size:12.5px;line-height:1.7}
+.footer ul{list-style:none}
+.footer ul li{margin-bottom:8px}
+.footer ul a{color:rgba(255,255,255,0.65);text-decoration:none;font-size:12.5px}
+.footer ul a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;font-size:12px}
+.footer-logo{font-family:'Playfair Display',serif;font-size:16px;color:#fff;font-weight:700}
+
+/* ── ADMIN MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,31,61,0.6);z-index:1000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:#fff;border-radius:20px;width:900px;max-width:95vw;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(15,31,61,0.3)}
+.modal-header{background:var(--sea);color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center}
+.modal-header h2{font-family:'Playfair Display',serif;font-size:18px;font-weight:600}
+.modal-close{background:rgba(255,255,255,0.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.modal-close:hover{background:rgba(255,255,255,0.3)}
+.modal-body{display:flex;flex:1;overflow:hidden}
+.modal-sidebar{width:200px;background:var(--paper2);border-right:1px solid var(--border);padding:12px 0;flex-shrink:0;overflow-y:auto}
+.modal-nav-item{padding:10px 18px;font-size:13px;cursor:pointer;transition:all .2s;color:var(--ink2);display:flex;align-items:center;gap:8px}
+.modal-nav-item:hover,.modal-nav-item.active{background:var(--sea);color:#fff;padding-left:22px}
+.modal-content{flex:1;overflow-y:auto;padding:24px}
+.modal-content h3{font-size:16px;font-weight:500;color:var(--sea);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.stat-box{background:var(--paper2);border-radius:10px;padding:16px;text-align:center}
+.stat-box .val{font-size:24px;font-weight:600;color:var(--sea);font-family:'Playfair Display',serif}
+.stat-box .key{font-size:11.5px;color:var(--ink3);margin-top:3px}
+.mini-table{width:100%;border-collapse:collapse;font-size:13px}
+.mini-table th{text-align:left;padding:8px 12px;background:var(--paper2);color:var(--ink2);font-weight:500;font-size:12px}
+.mini-table td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--ink)}
+.mini-table tr:hover td{background:var(--paper)}
+.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px}
+.sd-active{background:var(--teal2)}
+.sd-pending{background:var(--gold2)}
+.sd-inactive{background:#94a3b8}
+.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:18px}
+.tab{padding:9px 16px;font-size:13px;cursor:pointer;color:var(--ink3);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab.active{color:var(--sea);border-color:var(--sea);font-weight:500}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+.hero-inner{grid-template-columns:1fr}
+.city-card{display:none}
+.news-grid{grid-template-columns:1fr}
+.news-side{display:none}
+.footer-top{grid-template-columns:1fr 1fr}
+.form-row{grid-template-columns:1fr}
+.header-main{flex-wrap:wrap}
+.header-search{max-width:100%;order:3;flex:1 0 100%}
+}
+
+/* ========================= */
+/* 🔥 ADVANCED RESPONSIVE FIX */
+/* ========================= */
+
+/* Smooth scaling */
+html{
+  font-size:clamp(14px,1.1vw,16px);
+}
+
+/* NAV SCROLL FIX (mobile) */
+.nav-inner{
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.nav-inner::-webkit-scrollbar{
+  display:none;
+}
+
+/* HERO RESPONSIVE */
+@media(max-width:992px){
+  .hero h2{
+    font-size:30px;
+  }
+  .hero p{
+    font-size:14px;
+  }
+}
+
+@media(max-width:576px){
+  .hero{
+    padding:40px 16px;
+  }
+  .hero h2{
+    font-size:24px;
+  }
+  .hero-stats{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+/* HEADER FIX */
+@media(max-width:768px){
+  .header-main{
+    gap:10px;
+  }
+  .header-auth{
+    width:100%;
+    justify-content:flex-end;
+  }
+}
+
+/* MODULE GRID FIX */
+@media(max-width:576px){
+  .mod-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+/* NEWS FIX */
+@media(max-width:768px){
+  .news-img{
+    height:160px;
+  }
+}
+
+/* PRICE GRID FIX */
+@media(max-width:576px){
+  .price-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* EVENTS FIX */
+@media(max-width:576px){
+  .events-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* BUSINESS GRID FIX */
+@media(max-width:576px){
+  .biz-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* FOOTER FIX */
+@media(max-width:576px){
+  .footer-top{
+    grid-template-columns:1fr;
+  }
+  .footer-bottom{
+    flex-direction:column;
+    gap:6px;
+    text-align:center;
+  }
+}
+
+/* ADMIN MODAL FIX */
+@media(max-width:768px){
+  .modal{
+    width:100%;
+    height:100%;
+    border-radius:0;
+  }
+  .modal-body{
+    flex-direction:column;
+  }
+  .modal-sidebar{
+    width:100%;
+    display:flex;
+    overflow-x:auto;
+  }
+  .modal-nav-item{
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+}
+
+/* BUTTON TOUCH IMPROVEMENT */
+button{
+  min-height:38px;
+}
+
+/* FORM FIX */
+@media(max-width:576px){
+  .feedback-form{
+    padding:18px;
+  }
+}
+
+/* PREVENT OVERFLOW */
+img,svg{
+  max-width:100%;
+}
+
+/* SCROLL SMOOTH */
+html{
+  scroll-behavior:smooth;
+}
+
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div>
+      <a href="#">Home</a>
+      <a href="#">About Us</a>
+      <a href="#">Tenders</a>
+      <a href="#">Downloads</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="topbar-date">Monday, April 06, 2026 &nbsp;|&nbsp; khachrod.in</div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-main">
+    <div class="logo-emblem">
+      <svg viewBox="0 0 32 32" fill="none">
+        <path d="M16 4L4 11v10l12 7 12-7V11L16 4z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="4" fill="rgba(255,255,255,0.8)"/>
+        <path d="M16 4v5M16 23v5M4 11l4 2.5M24 18.5l4 2.5M4 21l4-2.5M24 13.5l4-2.5" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <h1>Khachrod City</h1>
+      <p>Smart Information Portal</p>
+      <span>khachrod.in &nbsp;·&nbsp; Ujjain, Madhya Pradesh</span>
+    </div>
+    <div class="header-search">
+      <svg class="si" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" placeholder="Search services, news, businesses...">
+    </div>
+    <div class="header-auth">
+      <button class="btn btn-outline btn-sm" onclick="">Admin Panel</button>
+      <button class="btn btn-solid btn-sm">Login / Register</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="active">Home</a>
+    <div class="nav-dropdown">
+      <a href="#">City Services ▾</a>
+      <div class="dropdown">
+        <a href="#">A</a>
+        <a href="#">B</a>
+        <a href="#">C</a>
+        <a href="#">D</a>
+        <a href="#">E</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <a href="#">Information ▾</a>
+      <div class="dropdown">
+        <a href="#">Local News</a>
+        <a href="#">Culture & Events</a>
+        <a href="#">Mandi Prices</a>
+        <a href="#">Weather</a>
+        <a href="#">Open Data</a>
+      </div>
+    </div>
+    <a href="#" onclick="scrollTo(0,900)">Business Directory</a>
+    <a href="#" onclick="scrollTo(0,1400)">Subdomains</a>
+    <a href="#">Jobs & Careers</a>
+    <a href="#feedback">Feedback</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">🟡 Digital India Initiative · Khachrod Smart City</div>
+      <h2>Your City,<br>Digitally Connected</h2>
+      <p>Access city services, local news, mandi prices, business directory, government schemes and real-time civic data — all in one unified platform.</p>
+      <div class="hero-actions">
+        <button class="btn-hero btn-gold">Explore Services</button>
+        <button class="btn-hero btn-ghost">Request Subdomain</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">11</div><div class="lbl">Active Subdomains</div></div>
+        <div class="hero-stat"><div class="num">240+</div><div class="lbl">Businesses Listed</div></div>
+        <div class="hero-stat"><div class="num">8,200+</div><div class="lbl">Citizens Served</div></div>
+      </div>
+    </div>
+    <div class="city-card">
+      <h3>City At A Glance</h3>
+      <div class="city-info-row">
+        <span class="ci-label">City Status</span>
+        <span class="ci-badge green">Active Portal</span>
+      </div>
+      <div class="city-info-row">
+        <span class="ci-label">District</span>
+        <span class="ci-value">Ujjain</span>
+      </div>
+      <div class="city-info-row">
+        <span class="ci-label">Division</span>
+        <span class="ci-value">Madhya Pradesh</span>
+      </div>
+      <div class="city-info-row">
+        <span class="ci-label">Today Weather</span>
+        <span class="ci-value">34°C ☀ Clear</span>
+      </div>
+      <div class="city-info-row">
+        <span class="ci-label">Mandi Status</span>
+        <span class="ci-badge amber">Open — Live</span>
+      </div>
+      <div class="city-info-row">
+        <span class="ci-label">Portal Version</span>
+        <span class="ci-value">v2.1.0</span>
+      </div>
+      <div class="city-info-row">
+        <span class="ci-label">Today Visitors</span>
+        <span class="ci-value">1,042</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-label">LIVE MANDI</span>
+    <div class="ticker-track">
+      <div class="ticker-items">
+        <span class="ticker-item">🌾 Wheat <span class="arrow-up">▲</span> ₹2,180/q</span>
+        <span class="ticker-item">🌽 Maize <span class="arrow-dn">▼</span> ₹1,840/q</span>
+        <span class="ticker-item">🫘 Soybean <span class="arrow-up">▲</span> ₹4,420/q</span>
+        <span class="ticker-item">🧅 Onion <span class="arrow-up">▲</span> ₹2,200/q</span>
+        <span class="ticker-item">🧄 Garlic <span class="arrow-dn">▼</span> ₹6,800/q</span>
+        <span class="ticker-item">🌿 Coriander <span class="arrow-up">▲</span> ₹7,200/q</span>
+        <span class="ticker-item">🥜 Groundnut <span class="arrow-up">▲</span> ₹5,100/q</span>
+        <span class="ticker-item">🌾 Barley <span class="arrow-dn">▼</span> ₹1,650/q</span>
+        <!-- duplicate for seamless scroll -->
+        <span class="ticker-item">🌾 Wheat <span class="arrow-up">▲</span> ₹2,180/q</span>
+        <span class="ticker-item">🌽 Maize <span class="arrow-dn">▼</span> ₹1,840/q</span>
+        <span class="ticker-item">🫘 Soybean <span class="arrow-up">▲</span> ₹4,420/q</span>
+        <span class="ticker-item">🧅 Onion <span class="arrow-up">▲</span> ₹2,200/q</span>
+        <span class="ticker-item">🧄 Garlic <span class="arrow-dn">▼</span> ₹6,800/q</span>
+        <span class="ticker-item">🌿 Coriander <span class="arrow-up">▲</span> ₹7,200/q</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULES -->
+<div class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-title">City Services & Modules</div>
+      <div class="section-sub">Quick access to all city information and digital services</div>
+    </div>
+  </div>
+  <div class="mod-grid">
+    <a class="mod-card blue" href="#">
+      <div class="mod-icon bg-blue">📰</div>
+      <span class="mod-badge live">LIVE</span>
+      <h3>Local News</h3>
+      <p>Latest Khachrod city news, announcements & notices</p>
+    </a>
+    <a class="mod-card teal" href="#">
+      <div class="mod-icon bg-teal">🌾</div>
+      <span class="mod-badge live">LIVE</span>
+      <h3>Mandi Prices</h3>
+      <p>Real-time wholesale commodity & produce prices</p>
+    </a>
+    <a class="mod-card gold" href="#">
+      <div class="mod-icon bg-gold">🎪</div>
+      <h3>Events & Culture</h3>
+      <p>Festivals, yatras, civic meetings & local culture</p>
+    </a>
+    <a class="mod-card purple" href="#">
+      <div class="mod-icon bg-purple">💼</div>
+      <h3>Job Portal</h3>
+      <p>Local employment opportunities & career listings</p>
+    </a>
+    <a class="mod-card coral" href="#">
+      <div class="mod-icon bg-coral">🏪</div>
+      <h3>Business Directory</h3>
+      <p>Shops, services and local business listings</p>
+    </a>
+    <a class="mod-card slate" href="#">
+      <div class="mod-icon bg-slate">🎓</div>
+      <h3>Education</h3>
+      <p>Schools, colleges and educational resources</p>
+    </a>
+    <a class="mod-card blue" href="#">
+      <div class="mod-icon bg-blue">🏛️</div>
+      <h3>Government Schemes</h3>
+      <p>Central & state welfare schemes for citizens</p>
+    </a>
+    <a class="mod-card teal" href="#">
+      <div class="mod-icon bg-teal">📊</div>
+      <h3>Open Data</h3>
+      <p>City datasets, reports and statistical resources</p>
+    </a>
+    <a class="mod-card gold" href="#">
+      <div class="mod-icon bg-gold">🥛</div>
+      <h3>Dairy Portal</h3>
+      <p>Milk collection, rates and dairy cooperative data</p>
+    </a>
+    <a class="mod-card purple" href="#">
+      <div class="mod-icon bg-purple">💻</div>
+      <h3>Developers</h3>
+      <p>API access, documentation and developer tools</p>
+    </a>
+  </div>
+</div>
+
+<!-- NEWS -->
+<div class="section" style="padding-top:4px">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Latest News</div>
+      <div class="section-sub">News and announcements from Khachrod city</div>
+    </div>
+    <a class="see-all" href="#">See all news →</a>
+  </div>
+  <div class="news-grid">
+    <div class="news-main">
+      <div class="news-img">
+        <span class="news-cat">Smart City</span>
+      </div>
+      <div class="news-body">
+        <h3>Khachrod City Portal Launches New Digital Services for Citizen </h3>
+        <p></p>
+        <div class="news-meta">
+          <span>📅 April 05, 2026</span>
+          <span>✍️ City Desk</span>
+          <span>👁 1,240 views</span>
+        </div>
+      </div>
+    </div>
+    <div class="news-side">
+      <div class="news-card-sm">
+        <div class="news-sm-img"></div>
+        <div class="news-sm-body">
+          <h4>Mandi Committee Revises Wheat Prices for Rabi Season 2026</h4>
+          <div class="meta">📅 Apr 04, 2026 &nbsp;·&nbsp; Mandi</div>
+        </div>
+      </div>
+      <div class="news-card-sm">
+        <div class="news-sm-img" style="background:linear-gradient(135deg,var(--gold),var(--teal))"></div>
+        <div class="news-sm-body">
+          <h4>New Dairy Cooperative Opens Cold Storage Facility in Khachrod</h4>
+          <div class="meta">📅 Apr 03, 2026 &nbsp;·&nbsp; Agriculture</div>
+        </div>
+      </div>
+      <div class="news-card-sm">
+        <div class="news-sm-img" style="background:linear-gradient(135deg,#7c3aed,var(--sea))"></div>
+        <div class="news-sm-body">
+          <h4>CM Announces Scholarship Scheme for Students from Khachrod Block</h4>
+          <div class="meta">📅 Apr 02, 2026 &nbsp;·&nbsp; Education</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICE DASHBOARD -->
+<div class="section" style="background:var(--paper2);padding:36px 24px;max-width:100%;margin:0">
+<div style="max-width:1200px;margin:0 auto">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Price Dashboard</div>
+      <div class="section-sub">Today's commodity and grocery rates — Updated April 06, 2026</div>
+    </div>
+    <a class="see-all" href="#">Full price list →</a>
+  </div>
+  <div class="price-grid">
+    <div class="price-card">
+      <div class="price-left"><h4>Wheat</h4><p>Per Quintal</p></div>
+      <div class="price-right"><div class="price-val">₹2,180</div><span class="price-chg chg-up">▲ 1.2%</span></div>
+    </div>
+    <div class="price-card">
+      <div class="price-left"><h4>Soybean</h4><p>Per Quintal</p></div>
+      <div class="price-right"><div class="price-val">₹4,420</div><span class="price-chg chg-up">▲ 0.8%</span></div>
+    </div>
+    <div class="price-card">
+      <div class="price-left"><h4>Onion</h4><p>Per Quintal</p></div>
+      <div class="price-right"><div class="price-val">₹2,200</div><span class="price-chg chg-up">▲ 3.4%</span></div>
+    </div>
+    <div class="price-card">
+      <div class="price-left"><h4>Garlic</h4><p>Per Quintal</p></div>
+      <div class="price-right"><div class="price-val">₹6,800</div><span class="price-chg chg-dn">▼ 0.6%</span></div>
+    </div>
+    <div class="price-card">
+      <div class="price-left"><h4>Tomato</h4><p>Per Kg</p></div>
+      <div class="price-right"><div class="price-val">₹28</div><span class="price-chg chg-dn">▼ 5.1%</span></div>
+    </div>
+    <div class="price-card">
+      <div class="price-left"><h4>Potato</h4><p>Per Kg</p></div>
+      <div class="price-right"><div class="price-val">₹22</div><span class="price-chg chg-flat">→ Stable</span></div>
+    </div>
+    <div class="price-card">
+      <div class="price-left"><h4>Milk (Full Fat)</h4><p>Per Litre</p></div>
+      <div class="price-right"><div class="price-val">₹56</div><span class="price-chg chg-up">▲ 0.3%</span></div>
+    </div>
+    <div class="price-card">
+      <div class="price-left"><h4>LPG Cylinder</h4><p>14.2 kg</p></div>
+      <div class="price-right"><div class="price-val">₹903</div><span class="price-chg chg-flat">→ Stable</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SUBDOMAINS -->
+<div class="section" id="subdomains">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Subdomain Ecosystem</div>
+      <div class="section-sub">Specialized portals connected to khachrod.in</div>
+    </div>
+    <button class="btn btn-outline btn-sm" onclick="">Manage →</button>
+  </div>
+  <div class="sub-grid">
+    <a class="sub-chip" href="#"><span class="sub-dot active"></span><div><div class="sub-name">dairy</div><div class="sub-url">dairy.khachrod.in</div></div></a>
+    <a class="sub-chip" href="#"><span class="sub-dot active"></span><div><div class="sub-name">api</div><div class="sub-url">api.khachrod.in</div></div></a>
+    <a class="sub-chip" href="#"><span class="sub-dot active"></span><div><div class="sub-name">job</div><div class="sub-url">job.khachrod.in</div></div></a>
+    <a class="sub-chip" href="#"><span class="sub-dot active"></span><div><div class="sub-name">education</div><div class="sub-url">edu.khachrod.in</div></div></a>
+    <a class="sub-chip" href="#"><span class="sub-dot active"></span><div><div class="sub-name">mandi</div><div class="sub-url">mandi.khachrod.in</div></div></a>
+    <a class="sub-chip" href="#"><span class="sub-dot active"></span><div><div class="sub-name">developers</div><div class="sub-url">dev.khachrod.in</div></div></a>
+    <a class="sub-chip" href="#"><span class="sub-dot active"></span><div><div class="sub-name">business</div><div class="sub-url">biz.khachrod.in</div></div></a>
+    <a class="sub-chip" href="#"><span class="sub-dot active"></span><div><div class="sub-name">data</div><div class="sub-url">data.khachrod.in</div></div></a>
+    <a class="sub-chip" href="#"><span class="sub-dot reserved"></span><div><div class="sub-name">kmj</div><div class="sub-url">kmj.khachrod.in</div></div></a>
+    <a class="sub-chip" href="#"><span class="sub-dot reserved"></span><div><div class="sub-name">team</div><div class="sub-url">team.khachrod.in</div></div></a>
+    <a class="sub-chip" href="#"><span class="sub-dot active"></span><div><div class="sub-name">news</div><div class="sub-url">news.khachrod.in</div></div></a>
+    <a class="sub-chip" href="#" style="border-style:dashed;cursor:pointer" onclick="openAdmin()"><span class="sub-dot pending"></span><div><div class="sub-name" style="color:var(--ink3)">+ Request</div><div class="sub-url">new subdomain</div></div></a>
+  </div>
+  <div style="display:flex;gap:16px;margin-top:14px;font-size:12px;color:var(--ink3)">
+    <span><span style="color:var(--teal2)">●</span> Active (9)</span>
+    <span><span style="color:var(--gold2)">●</span> Reserved (2)</span>
+    <span><span style="color:#94a3b8">●</span> Pending</span>
+  </div>
+</div>
+
+<!-- EVENTS -->
+<div class="section" style="padding-top:4px">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Events & Culture</div>
+    </div>
+    <a class="see-all" href="#">View calendar →</a>
+  </div>
+  <div class="events-grid">
+    <div class="event-card">
+      <div class="event-header">
+        <div class="event-date">14</div>
+        <div class="event-month">April 2026</div>
+        <span class="event-tag et-festival">Festival</span>
+      </div>
+      <div class="event-body"><h3>Navratri Mela</h3><p>Annual harvest celebration at Khachrod ground with cultural programs</p></div>
+    </div>
+    <div class="event-card">
+      <div class="event-header" style="background:linear-gradient(135deg,#0d7a5f,#065e48)">
+        <div class="event-date">20</div>
+        <div class="event-month">April 2026</div>
+        <span class="event-tag et-meeting">Civic Meet</span>
+      </div>
+      <div class="event-body"><h3>Town Hall Meeting</h3><p>Ward committee meetings for infrastructure planning 2026–27</p></div>
+    </div>
+    <div class="event-card">
+      <div class="event-header" style="background:linear-gradient(135deg,#6d28d9,#4c1d95)">
+        <div class="event-date">02</div>
+        <div class="event-month">May 2026</div>
+        <span class="event-tag et-festival">Cultural</span>
+      </div>
+      <div class="event-body"><h3>Khachrod Kala Mahotsav</h3><p>Local arts and crafts festival showcasing traditional Malwa artistry</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- BUSINESS DIRECTORY -->
+<div class="section" style="background:var(--paper2);padding:36px 24px;max-width:100%;margin:0">
+<div style="max-width:1200px;margin:0 auto">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Business Directory</div>
+      <div class="section-sub">Local shops and services in Khachrod</div>
+    </div>
+    <a class="see-all" href="#">All businesses →</a>
+  </div>
+  <div class="biz-grid">
+    <div class="biz-card">
+      <div class="biz-icon">🏪</div>
+      <div class="biz-body">
+        <h4>Sharma General Store</h4>
+        <p>Main Market, Khachrod</p>
+        <span class="biz-stars">★★★★☆</span><span class="biz-cat">Retail</span>
+      </div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-icon">🏥</div>
+      <div class="biz-body">
+        <h4>City Medical Centre</h4>
+        <p>Hospital Road, Khachrod</p>
+        <span class="biz-stars">★★★★★</span><span class="biz-cat">Healthcare</span>
+      </div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-icon">🔧</div>
+      <div class="biz-body">
+        <h4>Patel Auto Workshop</h4>
+        <p>Industrial Area</p>
+        <span class="biz-stars">★★★★☆</span><span class="biz-cat">Auto</span>
+      </div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-icon">🌾</div>
+      <div class="biz-body">
+        <h4>Kisan Agro Inputs</h4>
+        <p>Mandi Road</p>
+        <span class="biz-stars">★★★★★</span><span class="biz-cat">Agriculture</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ADMIN TEASER -->
+<div class="section">
+  <div class="admin-banner">
+    <div>
+      <h3>Admin Control Centre</h3>
+      <p>Manage content, plugins, themes, subdomains and city data from one powerful dashboard. Role-based access for Super Admin, Admin and Sub-Admin users.</p>
+      <div class="admin-roles">
+        <span class="role-chip super">Super Admin</span>
+        <span class="role-chip">Admin</span>
+        <span class="role-chip">Sub Admin</span>
+        <span class="role-chip">Public User</span>
+      </div>
+    </div>
+    <button class="btn-hero btn-gold" onclick="openAdmin()">Open Admin Panel →</button>
+  </div>
+</div>
+
+<!-- FEEDBACK -->
+<div class="section" id="feedback">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Feedback & Suggestions</div>
+      <div class="section-sub">Help us improve city services</div>
+    </div>
+  </div>
+  <div class="feedback-form">
+    <h3>Share Your Feedback</h3>
+    <div class="form-row">
+      <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your name"></div>
+      <div class="form-group"><label>Mobile / Email</label><input type="text" placeholder="Contact info"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Category</label>
+        <select>
+          <option>City Services</option>
+          <option>Website Feedback</option>
+          <option>Mandi Prices</option>
+          <option>News & Information</option>
+          <option>Business Directory</option>
+          <option>Subdomain Request</option>
+          <option>General Suggestion</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Priority</label>
+        <select><option>Normal</option><option>Urgent</option><option>Suggestion</option></select>
+      </div>
+    </div>
+    <div class="form-group" style="margin-bottom:14px"><label>Message</label><textarea placeholder="Describe your feedback or suggestion in detail..."></textarea></div>
+    <div class="submit-row"><button class="btn-submit">Submit Feedback</button></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Khachrod City</div>
+      <p style="margin-top:10px;font-size:12.5px">Smart Information Portal · khachrod.in<br>Nagar Parishad, Khachrod, District Ujjain,<br>Madhya Pradesh – 456441</p>
+      <p style="margin-top:10px;font-size:11.5px;color:rgba(255,255,255,0.4)">Made In Khachrod · Made For Khachrod</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">City Services</a></li>
+        <li><a href="#">Mandi Prices</a></li>
+        <li><a href="#">Business Directory</a></li>
+        <li><a href="#">Job Portal</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Subdomains</h4>
+      <ul>
+        <li><a href="#">dairy.khachrod.in</a></li>
+        <li><a href="#">mandi.khachrod.in</a></li>
+        <li><a href="#">news.khachrod.in</a></li>
+        <li><a href="#">job.khachrod.in</a></li>
+        <li><a href="#">api.khachrod.in</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Administration</h4>
+      <ul>
+        <li><a href="#">API</a></li>
+        <li><a href="#">Local News</a></li>
+        <li><a href="#">Open Data</a></li>
+        <li><a href="#">Admin Login</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Khachrod City Smart Portal · khachrod.in. All rights reserved.</span>
+    <span>Privacy Policy · Terms of Use · KUH.in 2.1</span>
+  </div>
+</div>
+
+<!-- ADMIN MODAL -->
+<div class="modal-overlay" id="adminModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>🏛 Admin Control Centre — khachrod.in</h2>
+      <button class="modal-close" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-sidebar">
+        <div class="modal-nav-item active" onclick="showTab('dashboard',this)">📊 Dashboard</div>
+        <div class="modal-nav-item" onclick="showTab('subdomains',this)">🌐 Subdomains</div>
+        <div class="modal-nav-item" onclick="showTab('content',this)">📝 Content</div>
+        <div class="modal-nav-item" onclick="showTab('users',this)">👥 Users</div>
+        <div class="modal-nav-item" onclick="showTab('plugins',this)">🔌 Plugins</div>
+        <div class="modal-nav-item" onclick="showTab('themes',this)">🎨 Themes</div>
+        <div class="modal-nav-item" onclick="showTab('feedback',this)">💬 Feedback</div>
+        <div class="modal-nav-item" onclick="showTab('prices',this)">💰 Prices</div>
+        <div class="modal-nav-item" onclick="showTab('logs',this)">🔍 Activity Log</div>
+      </div>
+      <div class="modal-content" id="modalContent">
+        <!-- Dashboard -->
+        <div id="tab-dashboard">
+          <h3>System Dashboard</h3>
+          <div class="stat-grid">
+            <div class="stat-box"><div class="val">11</div><div class="key">Active Subdomains</div></div>
+            <div class="stat-box"><div class="val">48</div><div class="key">Total Posts</div></div>
+            <div class="stat-box"><div class="val">5</div><div class="key">Pending Requests</div></div>
+            <div class="stat-box"><div class="val">240</div><div class="key">Businesses</div></div>
+            <div class="stat-box"><div class="val">3</div><div class="key">Active Themes</div></div>
+            <div class="stat-box"><div class="val">12</div><div class="key">Plugins Installed</div></div>
+          </div>
+          <h3>Recent Activity</h3>
+          <table class="mini-table">
+            <tr><th>Time</th><th>User</th><th>Action</th><th>Module</th></tr>
+            <tr><td>09:42 AM</td><td>superadmin</td><td>Updated wheat price</td><td>Mandi</td></tr>
+            <tr><td>09:15 AM</td><td>admin1</td><td>Published news post</td><td>News</td></tr>
+            <tr><td>08:55 AM</td><td>admin2</td><td>Added business listing</td><td>Directory</td></tr>
+            <tr><td>08:30 AM</td><td>superadmin</td><td>Activated plugin: Open Data</td><td>Plugins</td></tr>
+            <tr><td>07:18 AM</td><td>user_4210</td><td>Submitted feedback</td><td>Feedback</td></tr>
+          </table>
+        </div>
+        <!-- Subdomains -->
+        <div id="tab-subdomains" style="display:none">
+          <h3>Subdomain Management</h3>
+          <div class="tab-bar">
+            <div class="tab active" onclick="switchTab(this,'all')">All (13)</div>
+            <div class="tab" onclick="switchTab(this,'active')">Active (9)</div>
+            <div class="tab" onclick="switchTab(this,'reserved')">Reserved (2)</div>
+            <div class="tab" onclick="switchTab(this,'pending')">Pending (2)</div>
+          </div>
+          <table class="mini-table">
+            <tr><th>Status</th><th>Subdomain</th><th>URL</th><th>Created</th><th>Action</th></tr>
+            <tr><td><span class="status-dot sd-active"></span>Active</td><td>dairy</td><td>dairy.khachrod.in</td><td>Jan 2026</td><td style="color:var(--sea);cursor:pointer">Manage</td></tr>
+            <tr><td><span class="status-dot sd-active"></span>Active</td><td>api</td><td>api.khachrod.in</td><td>Jan 2026</td><td style="color:var(--sea);cursor:pointer">Manage</td></tr>
+            <tr><td><span class="status-dot sd-active"></span>Active</td><td>mandi</td><td>mandi.khachrod.in</td><td>Feb 2026</td><td style="color:var(--sea);cursor:pointer">Manage</td></tr>
+            <tr><td><span class="status-dot sd-active"></span>Active</td><td>news</td><td>news.khachrod.in</td><td>Feb 2026</td><td style="color:var(--sea);cursor:pointer">Manage</td></tr>
+            <tr><td><span class="status-dot sd-active"></span>Active</td><td>job</td><td>job.khachrod.in</td><td>Feb 2026</td><td style="color:var(--sea);cursor:pointer">Manage</td></tr>
+            <tr><td><span class="status-dot sd-pending"></span>Reserved</td><td>kmj</td><td>kmj.khachrod.in</td><td>Mar 2026</td><td style="color:var(--gold);cursor:pointer">Activate</td></tr>
+            <tr><td><span class="status-dot sd-inactive"></span>Pending</td><td>health</td><td>health.khachrod.in</td><td>Apr 2026</td><td style="color:var(--sea);cursor:pointer">Review</td></tr>
+          </table>
+          <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--border)">
+            <strong style="font-size:13px;color:var(--ink2)">Create New Subdomain</strong>
+            <div style="display:flex;gap:10px;margin-top:10px">
+              <input type="text" placeholder="subdomain name" style="border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;outline:none;flex:1;font-family:'DM Sans',sans-serif">
+              <button class="btn btn-solid">Create</button>
+            </div>
+          </div>
+        </div>
+        <!-- Content -->
+        <div id="tab-content" style="display:none">
+          <h3>Content Management</h3>
+          <div style="display:flex;gap:10px;margin-bottom:16px">
+            <button class="btn btn-solid btn-sm">+ New Post</button>
+            <button class="btn btn-outline btn-sm">+ New Page</button>
+            <button class="btn btn-outline btn-sm">Media Library</button>
+          </div>
+          <table class="mini-table">
+            <tr><th>Title</th><th>Type</th><th>Status</th><th>Author</th><th>Date</th></tr>
+            <tr><td>Khachrod Portal Phase 2 Launch</td><td>News</td><td><span class="status-dot sd-active"></span>Published</td><td>admin1</td><td>Apr 05</td></tr>
+            <tr><td>Mandi Price Bulletin — April 2026</td><td>Bulletin</td><td><span class="status-dot sd-active"></span>Published</td><td>admin2</td><td>Apr 04</td></tr>
+            <tr><td>Navratri Festival Guide</td><td>Event</td><td><span class="status-dot sd-pending"></span>Draft</td><td>subadmin1</td><td>Apr 03</td></tr>
+            <tr><td>City Water Supply Schedule</td><td>Notice</td><td><span class="status-dot sd-active"></span>Published</td><td>admin1</td><td>Apr 01</td></tr>
+          </table>
+        </div>
+        <!-- Users -->
+        <div id="tab-users" style="display:none">
+          <h3>User Management</h3>
+          <table class="mini-table">
+            <tr><th>Username</th><th>Role</th><th>Email</th><th>Status</th></tr>
+            <tr><td>superadmin</td><td style="color:var(--gold)">Super Admin</td><td>admin@khachrod.in</td><td><span class="status-dot sd-active"></span>Active</td></tr>
+            <tr><td>admin1</td><td style="color:var(--sea)">Admin</td><td>content@khachrod.in</td><td><span class="status-dot sd-active"></span>Active</td></tr>
+            <tr><td>admin2</td><td style="color:var(--sea)">Admin</td><td>mandi@khachrod.in</td><td><span class="status-dot sd-active"></span>Active</td></tr>
+            <tr><td>subadmin1</td><td>Sub Admin</td><td>news@khachrod.in</td><td><span class="status-dot sd-active"></span>Active</td></tr>
+            <tr><td>citizen_001</td><td>User</td><td>user@email.com</td><td><span class="status-dot sd-active"></span>Active</td></tr>
+          </table>
+        </div>
+        <!-- Plugins -->
+        <div id="tab-plugins" style="display:none">
+          <h3>Plugin Manager</h3>
+          <table class="mini-table">
+            <tr><th>Plugin</th><th>Version</th><th>Status</th><th>Action</th></tr>
+            <tr><td>Mandi Price Feed</td><td>1.2.0</td><td><span class="status-dot sd-active"></span>Active</td><td style="color:var(--sea);cursor:pointer">Deactivate</td></tr>
+            <tr><td>News Publisher</td><td>2.0.1</td><td><span class="status-dot sd-active"></span>Active</td><td style="color:var(--sea);cursor:pointer">Deactivate</td></tr>
+            <tr><td>Business Directory</td><td>1.5.0</td><td><span class="status-dot sd-active"></span>Active</td><td style="color:var(--sea);cursor:pointer">Deactivate</td></tr>
+            <tr><td>Event Manager</td><td>1.1.0</td><td><span class="status-dot sd-active"></span>Active</td><td style="color:var(--sea);cursor:pointer">Deactivate</td></tr>
+            <tr><td>Open Data API</td><td>1.0.0</td><td><span class="status-dot sd-pending"></span>Inactive</td><td style="color:var(--teal);cursor:pointer">Activate</td></tr>
+            <tr><td>Job Portal</td><td>1.3.2</td><td><span class="status-dot sd-active"></span>Active</td><td style="color:var(--sea);cursor:pointer">Deactivate</td></tr>
+          </table>
+          <div style="margin-top:14px"><button class="btn btn-outline btn-sm">+ Upload Plugin</button></div>
+        </div>
+        <!-- Themes -->
+        <div id="tab-themes" style="display:none">
+          <h3>Theme Manager</h3>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+            <div style="border:2px solid var(--sea);border-radius:12px;overflow:hidden">
+              <div style="height:80px;background:linear-gradient(135deg,var(--sea),var(--teal))"></div>
+              <div style="padding:10px 12px"><strong style="font-size:13px">City Blue</strong><br><span style="font-size:11px;color:var(--ink3)">Active Theme</span><br><button class="btn btn-solid btn-sm" style="margin-top:8px;font-size:11px;padding:4px 10px">Settings</button></div>
+            </div>
+            <div style="border:1.5px solid var(--border);border-radius:12px;overflow:hidden">
+              <div style="height:80px;background:linear-gradient(135deg,#065e48,#1a4480)"></div>
+              <div style="padding:10px 12px"><strong style="font-size:13px">Forest Green</strong><br><span style="font-size:11px;color:var(--ink3)">Installed</span><br><button class="btn btn-outline btn-sm" style="margin-top:8px;font-size:11px;padding:4px 10px">Activate</button></div>
+            </div>
+            <div style="border:1.5px dashed var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;height:140px;cursor:pointer;color:var(--ink3);font-size:13px">+ Upload Theme</div>
+          </div>
+        </div>
+        <!-- Feedback -->
+        <div id="tab-feedback" style="display:none">
+          <h3>Feedback & Suggestions</h3>
+          <table class="mini-table">
+            <tr><th>Name</th><th>Category</th><th>Message Preview</th><th>Status</th></tr>
+            <tr><td>Ramesh Patel</td><td>Mandi Prices</td><td>Wheat prices need update for...</td><td><span class="status-dot sd-pending"></span>Pending</td></tr>
+            <tr><td>Sunita Sharma</td><td>City Services</td><td>Water supply timing should be...</td><td><span class="status-dot sd-pending"></span>Pending</td></tr>
+            <tr><td>Mukesh Verma</td><td>Subdomain Request</td><td>Please create transport subdomain...</td><td><span class="status-dot sd-inactive"></span>Review</td></tr>
+            <tr><td>Priya Singh</td><td>Website Feedback</td><td>Great portal, suggest adding...</td><td><span class="status-dot sd-active"></span>Resolved</td></tr>
+          </table>
+        </div>
+        <!-- Prices -->
+        <div id="tab-prices" style="display:none">
+          <h3>Price Management</h3>
+          <table class="mini-table">
+            <tr><th>Commodity</th><th>Category</th><th>Price</th><th>Unit</th><th>Last Updated</th></tr>
+            <tr><td>Wheat</td><td>Grain</td><td>₹2,180</td><td>/quintal</td><td>Today 08:00</td></tr>
+            <tr><td>Soybean</td><td>Oilseed</td><td>₹4,420</td><td>/quintal</td><td>Today 08:00</td></tr>
+            <tr><td>Onion</td><td>Vegetables</td><td>₹2,200</td><td>/quintal</td><td>Today 09:00</td></tr>
+            <tr><td>Tomato</td><td>Vegetables</td><td>₹28</td><td>/kg</td><td>Today 09:30</td></tr>
+            <tr><td>Milk</td><td>Dairy</td><td>₹56</td><td>/litre</td><td>Today 06:00</td></tr>
+          </table>
+          <div style="margin-top:14px"><button class="btn btn-solid btn-sm">+ Add Price Entry</button></div>
+        </div>
+        <!-- Logs -->
+        <div id="tab-logs" style="display:none">
+          <h3>Admin Activity Log</h3>
+          <table class="mini-table">
+            <tr><th>Timestamp</th><th>User</th><th>IP</th><th>Action</th><th>Module</th></tr>
+            <tr><td>2026-04-06 09:42</td><td>superadmin</td><td>192.168.1.10</td><td>Price updated</td><td>Mandi</td></tr>
+            <tr><td>2026-04-06 09:15</td><td>admin1</td><td>192.168.1.22</td><td>Post published</td><td>News</td></tr>
+            <tr><td>2026-04-06 08:55</td><td>admin2</td><td>192.168.1.31</td><td>Business added</td><td>Directory</td></tr>
+            <tr><td>2026-04-06 08:30</td><td>superadmin</td><td>192.168.1.10</td><td>Plugin activated</td><td>Plugins</td></tr>
+            <tr><td>2026-04-06 07:45</td><td>subadmin1</td><td>192.168.1.45</td><td>Login</td><td>Auth</td></tr>
+            <tr><td>2026-04-05 16:20</td><td>admin1</td><td>192.168.1.22</td><td>Theme settings saved</td><td>Themes</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openAdmin(){document.getElementById('adminModal').classList.add('open')}
+function closeAdmin(){document.getElementById('adminModal').classList.remove('open')}
+document.getElementById('adminModal').addEventListener('click',function(e){if(e.target===this)closeAdmin()})
+
+function showTab(tab,el){
+  document.querySelectorAll('[id^="tab-"]').forEach(t=>t.style.display='none');
+  document.getElementById('tab-'+tab).style.display='block';
+  document.querySelectorAll('.modal-nav-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+}
+function switchTab(el,val){
+  document.querySelectorAll('.tab-bar .tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
