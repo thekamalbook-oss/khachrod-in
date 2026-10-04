@@ -2,7 +2,7 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - main  # अगर आपकी मुख्य ब्रांच का नाम master है, तो यहाँ main की जगह master लिख दें
+      - main 
 jobs:
   deploy:
     runs-on: ubuntu-latest
